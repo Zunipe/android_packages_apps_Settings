@@ -79,6 +79,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     static final String KEY_WIFI_HOTSPOT_SPEED = "wifi_hotspot_speed";
     @VisibleForTesting
     static final String KEY_INSTANT_HOTSPOT = "wifi_hotspot_instant";
+    @VisibleForTesting
+    static final String KEY_WIFI_HOTSPOT_AUTO_ENABLE = "wifi_hotspot_auto_enable";
 
     @VisibleForTesting
     SettingsMainSwitchBar mMainSwitchBar;
@@ -93,6 +95,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
+    @VisibleForTesting
+    WifiTetherAutoEnablePreferenceController mWifiTetherAutoEnablePreferenceController;
 
     @VisibleForTesting
     boolean mUnavailable;
@@ -156,6 +160,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             setupInstantHotspot(mWifiTetherViewModel.isInstantHotspotFeatureAvailable());
             mWifiTetherViewModel.getRestarting().observe(this, this::onRestartingChanged);
         }
+        Log.d("phf", "WifiTetherSettings onCreate");
     }
 
     @VisibleForTesting
@@ -205,6 +210,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mMaxCompatibilityPrefController =
                 use(WifiTetherMaximizeCompatibilityPreferenceController.class);
+        mWifiTetherAutoEnablePreferenceController = use(WifiTetherAutoEnablePreferenceController.class);
     }
 
     @Override
@@ -263,6 +269,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (context != null) {
             context.unregisterReceiver(mTetherChangeReceiver);
         }
+        if (mWifiTetherAutoEnablePreferenceController != null) {
+            mWifiTetherAutoEnablePreferenceController.unregisterObserver();
+        }
     }
 
     protected void onSecuritySummaryChanged(Integer securityResId) {
@@ -292,6 +301,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
         controllers.add(new WifiTetherMaximizeCompatibilityPreferenceController(context, listener));
+        controllers.add(new WifiTetherAutoEnablePreferenceController(context));
         return controllers;
     }
 
@@ -396,6 +406,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
                 keys.add(KEY_WIFI_HOTSPOT_SPEED);
                 keys.add(KEY_INSTANT_HOTSPOT);
+                keys.add(KEY_WIFI_HOTSPOT_AUTO_ENABLE);
             } else {
                 if (!isSpeedFeatureAvailable()) {
                     keys.add(KEY_WIFI_HOTSPOT_SECURITY);

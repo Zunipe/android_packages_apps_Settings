@@ -65,4 +65,9 @@
         android:title="@string/wifi_hotspot_instant_title"
         android:summary="@string/summary_placeholder"
         settings:isPreferenceVisible="false"/>
+
+    <SwitchPreferenceCompat
+        android:key="wifi_hotspot_auto_enable"
+        android:summary="@string/wifi_hotspot_auto_enable_summary"
+        android:title="@string/wifi_hotspot_auto_enable" />
 </PreferenceScreen>

@@ -2918,6 +2918,8 @@
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
     <!-- Title for the toggle to enable/disable the maximize compatibility [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_maximize_compatibility">Extend compatibility</string>
+    <string name="wifi_hotspot_auto_enable">Auto Enable Wifi Hotspot</string>
+    <string name="wifi_hotspot_auto_enable_summary">Automatically turn on the hotspot when the device is powered on</string>
     <!-- Summary for the toggle to show the maximize compatibility warning message in single AP device [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary">Helps other devices find this hotspot. Reduces hotspot connection speed.</string>
     <!-- Summary for the toggle to show the maximize compatibility warning message in dual AP device [CHAR LIMIT=NONE]-->
@@ -9482,6 +9484,9 @@
 
     <!-- Configure lock screen: Summary for the option of unlocking directly to home. [CHAR LIMIT=150] -->
     <string name="lockscreen_bypass_summary">After unlocking, go directly to last used screen. Notifications won’t show on lock screen. Swipe down from top to see them.</string>
+
+    <!-- Configure notifications: Title for smart hide on lock screen. [CHAR LIMIT=50] -->
+    <string name="notification_smart_hide">Smart hide sensitive notifications</string>
 
     <!-- Configure lock screen: Search keywords for the option of unlocking directly to home. [CHAR LIMIT=100] -->
     <string name="keywords_lockscreen_bypass">Lock screen, Lockscreen, Skip, Bypass</string>
