@@ -74,6 +74,15 @@
             android:summary="@string/sound_dashboard_summary"
             settings:highlightableMenuKey="@string/menu_key_sound" />
 
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.zunipe.GameSettings"
+            android:icon="@drawable/ic_homepage_game"
+            android:key="top_level_game"
+            android:order="-38"
+            android:title="@string/game_settings"
+            android:summary="@string/game_dashboard_summary"
+            settings:highlightableMenuKey="@string/menu_key_sound" />
+
         <com.android.settings.widget.RestrictedHomepagePreference
             android:fragment="com.android.settings.notification.modes.ZenModesListFragment"
             android:icon="@drawable/ic_homepage_modes"
