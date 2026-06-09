@@ -3607,6 +3607,8 @@
     <string name="account_dashboard_title" msgid="8228773251948253914">"密码和账号"</string>
     <string name="account_dashboard_default_summary" msgid="7976899924144356939">"登录和自动填充建议"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"默认应用"</string>
+    <string name="app_custom_hide_dashboard_title" msgid="4071015747629103216">"自定义隐藏应用"</string>
+    <string name="all_app_list" msgid="4071015747629103216">"管理所有应用"</string>
     <string name="cloned_apps_dashboard_title" msgid="5542076801222950921">"克隆应用"</string>
     <string name="desc_cloned_apps_intro_text" msgid="1369621522882622476">"创建应用的第二个实例，这样您就可以同时使用两个账号。"</string>
     <string name="desc_cloneable_app_list_text" msgid="3354586725814708688">"可以克隆的应用。"</string>

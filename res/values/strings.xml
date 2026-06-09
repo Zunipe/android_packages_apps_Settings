@@ -8605,6 +8605,8 @@
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
+    <string name="app_custom_hide_dashboard_title">Hide apps</string>
+    <string name="all_app_list">All app list</string>
     <!-- Title for setting tile leading to App Clones menu under the Apps page [CHAR LIMIT=40] -->
     <string name="cloned_apps_dashboard_title">Cloned Apps</string>
     <!-- Description for introduction of the cloned apps page [CHAR LIMIT=NONE]-->

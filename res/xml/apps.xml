@@ -61,6 +61,13 @@
         settings:controller="com.android.settings.applications.DefaultAppsPreferenceController"/>
 
     <Preference
+        android:key="select_hide_apps"
+        android:title="@string/app_custom_hide_dashboard_title"
+        android:summary="@string/app_custom_hide_dashboard_title"
+        android:order="-993"
+        settings:controller="com.android.settings.applications.CustomHideAppsPreferenceController"/>
+
+    <Preference
         android:key="cloned_apps"
         android:title="@string/cloned_apps_dashboard_title"
         android:summary="@string/summary_placeholder"

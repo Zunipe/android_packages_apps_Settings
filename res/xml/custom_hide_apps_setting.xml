@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/app_custom_hide_dashboard_title">
+
+    <PreferenceCategory
+        android:key="custom_hide_apps_category"
+        android:title="@string/all_app_list" />
+
+</PreferenceScreen>
