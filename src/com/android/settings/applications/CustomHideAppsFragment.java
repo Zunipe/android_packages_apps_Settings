@@ -2,23 +2,24 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.zunipe.ZunipePackageManager;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import android.graphics.drawable.Drawable;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import android.zunipe.ZunipePackageManager;
 
 public class CustomHideAppsFragment extends DashboardFragment {
 
@@ -78,29 +79,37 @@ public class CustomHideAppsFragment extends DashboardFragment {
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> apps = mPackageManager.queryIntentActivities(mainIntent, 0);
 
-        if (apps != null) {
-            for (ResolveInfo resolveInfo : apps) {
-                String packageName = resolveInfo.activityInfo.packageName;
-                CharSequence label = resolveInfo.loadLabel(mPackageManager);
-                String appName = label != null ? label.toString() : packageName;
-                Drawable appIcon = resolveInfo.loadIcon(mPackageManager);
-
-                SwitchPreference appPref = new SwitchPreference(getPrefContext());
-                appPref.setKey(packageName);
-                appPref.setTitle(appName);
-                appPref.setIcon(appIcon);
-
-                boolean isHidden = mHiddenPackageNames.contains(packageName);
-                appPref.setChecked(isHidden);
-
-                appPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                    boolean isChecked = (Boolean) newValue;
-                    onHideStatusChanged(packageName, isChecked);
-                    return true;
-                });
-
-                mAppCategory.addPreference(appPref);
+        for (ResolveInfo resolveInfo : apps) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            try {
+                ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName, PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0 ||
+                        (appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                    continue;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                continue;
             }
+
+            CharSequence label = resolveInfo.loadLabel(mPackageManager);
+            String appName = label.toString();
+            Drawable appIcon = resolveInfo.loadIcon(mPackageManager);
+
+            SwitchPreference appPref = new SwitchPreference(getPrefContext());
+            appPref.setKey(packageName);
+            appPref.setTitle(appName);
+            appPref.setIcon(appIcon);
+
+            boolean isHidden = mHiddenPackageNames.contains(packageName);
+            appPref.setChecked(isHidden);
+
+            appPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean isChecked = (Boolean) newValue;
+                onHideStatusChanged(packageName, isChecked);
+                return true;
+            });
+
+            mAppCategory.addPreference(appPref);
         }
     }
 

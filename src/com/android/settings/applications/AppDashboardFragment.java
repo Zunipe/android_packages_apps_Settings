@@ -16,17 +16,24 @@
 
 package com.android.settings.applications;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.appcompat.UserAspectRatioAppsPreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -36,7 +43,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Settings page for apps. */
+/**
+ * Settings page for apps.
+ */
 // LINT.IfChange
 @SearchIndexable
 public class AppDashboardFragment extends DashboardFragment {
@@ -94,6 +103,51 @@ public class AppDashboardFragment extends DashboardFragment {
         final HibernatedAppsPreferenceController hibernatedAppsPreferenceController =
                 use(HibernatedAppsPreferenceController.class);
         getSettingsLifecycle().addObserver(hibernatedAppsPreferenceController);
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+
+        Preference preference = findPreference("select_hide_apps");
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(getActivity(), AppDashboardFragment.this);
+
+                    boolean launched = builder
+                            .setRequestCode(1001)
+                            .setTitle(getContext().getString(R.string.app_custom_hide_dashboard_title))
+                            .show();
+                    if (!launched) {
+                        new SubSettingLauncher(getContext())
+                                .setDestination(CustomHideAppsFragment.class.getName())
+                                .setTitleText(getContext().getString(R.string.app_custom_hide_dashboard_title))
+                                .setSourceMetricsCategory(MetricsEvent.VIEW_UNKNOWN)
+                                .launch();
+                    }
+
+                    return launched;
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1001) {
+            if (resultCode == Activity.RESULT_OK) {
+                new SubSettingLauncher(getContext())
+                        .setDestination(CustomHideAppsFragment.class.getName())
+                        .setTitleText(getContext().getString(R.string.app_custom_hide_dashboard_title))
+                        .setSourceMetricsCategory(MetricsEvent.VIEW_UNKNOWN)
+                        .launch();
+            }
+        }
     }
 
     @VisibleForTesting

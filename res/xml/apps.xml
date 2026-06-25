@@ -64,8 +64,7 @@
         android:key="select_hide_apps"
         android:title="@string/app_custom_hide_dashboard_title"
         android:summary="@string/app_custom_hide_dashboard_title"
-        android:order="-993"
-        settings:controller="com.android.settings.applications.CustomHideAppsPreferenceController"/>
+        android:order="-993" />
 
     <Preference
         android:key="cloned_apps"
