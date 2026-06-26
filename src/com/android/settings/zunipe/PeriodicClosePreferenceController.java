@@ -1,23 +1,26 @@
-package com.android.settings.wifi.tether;
+package com.android.settings.zunipe;
 
 import android.content.Context;
 import android.provider.Settings;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
-public class WifiTetherAutoEnablePreferenceController extends TogglePreferenceController implements OnCheckedChangeListener {
-    public WifiTetherAutoEnablePreferenceController(Context context, String key) {
-        super(context, key);
+public class PeriodicClosePreferenceController extends TogglePreferenceController {
+    private AutoHotspotSettings mHost;
+
+    public PeriodicClosePreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
+        super(context, preferenceKey);
     }
 
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+    public PeriodicClosePreferenceController(@NonNull Context context, @NonNull String preferenceKey, AutoHotspotSettings host) {
+        this(context, preferenceKey);
+        mHost = host;
     }
 
     @Override
@@ -30,16 +33,19 @@ public class WifiTetherAutoEnablePreferenceController extends TogglePreferenceCo
     public boolean setChecked(boolean isChecked) {
         Settings.System.putInt(mContext.getContentResolver(), getPreferenceKey(),
                 isChecked ? 1 : 0);
+        if (mHost != null) {
+            mHost.refresh();
+        }
         return true;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        SettingsMainSwitchPreference pref = screen.findPreference(
+        SwitchPreferenceCompat pref = screen.findPreference(
                 getPreferenceKey());
         if (pref != null) {
-            pref.addOnSwitchChangeListener(this);
+            pref.setOnPreferenceChangeListener(this);
             pref.setChecked(isChecked());
         }
     }
@@ -50,9 +56,7 @@ public class WifiTetherAutoEnablePreferenceController extends TogglePreferenceCo
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked != isChecked()) {
-            setChecked(isChecked);
-        }
+    public int getAvailabilityStatus() {
+        return AVAILABLE_UNSEARCHABLE;
     }
 }

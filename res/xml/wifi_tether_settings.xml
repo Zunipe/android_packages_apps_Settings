@@ -66,8 +66,9 @@
         android:summary="@string/summary_placeholder"
         settings:isPreferenceVisible="false"/>
 
-    <SwitchPreferenceCompat
+    <Preference
         android:key="wifi_hotspot_auto_enable"
         android:summary="@string/wifi_hotspot_auto_enable_summary"
+        android:fragment="com.android.settings.zunipe.AutoHotspotSettings"
         android:title="@string/wifi_hotspot_auto_enable" />
 </PreferenceScreen>

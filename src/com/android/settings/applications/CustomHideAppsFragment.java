@@ -83,8 +83,7 @@ public class CustomHideAppsFragment extends DashboardFragment {
             String packageName = resolveInfo.activityInfo.packageName;
             try {
                 ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName, PackageManager.MATCH_UNINSTALLED_PACKAGES);
-                if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0 ||
-                        (appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                if (appInfo.isSystemApp() && appInfo.isPrivilegedApp()) {
                     continue;
                 }
             } catch (PackageManager.NameNotFoundException e) {

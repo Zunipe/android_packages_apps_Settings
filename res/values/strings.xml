@@ -2918,8 +2918,6 @@
     <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
     <!-- Title for the toggle to enable/disable the maximize compatibility [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_maximize_compatibility">Extend compatibility</string>
-    <string name="wifi_hotspot_auto_enable">Auto Enable Wifi Hotspot</string>
-    <string name="wifi_hotspot_auto_enable_summary">Automatically turn on the hotspot when the device is powered on</string>
     <!-- Summary for the toggle to show the maximize compatibility warning message in single AP device [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary">Helps other devices find this hotspot. Reduces hotspot connection speed.</string>
     <!-- Summary for the toggle to show the maximize compatibility warning message in dual AP device [CHAR LIMIT=NONE]-->
@@ -14971,4 +14969,10 @@
         <item>GPU Freq</item>
     </string-array>
     <string name="perf_monitor_option_title">Performance monitoring entries</string>
+    <string name="wifi_hotspot_auto_enable">Auto Enable Wifi Hotspot</string>
+    <string name="wifi_hotspot_auto_enable_summary">Automatically turn on the hotspot when the device is powered on</string>
+    <string name="wifi_hotspot_periodic_close_title">Turn off hot spots periodically</string>
+    <string name="wifi_hotspot_periodic_close_summary">Open after the set time will automatically close the hot spot</string>
+    <string name="wifi_hotspot_periodic_start_title">Closing time</string>
+    <string name="wifi_hotspot_periodic_end_title">Recovery time</string>
 </resources>

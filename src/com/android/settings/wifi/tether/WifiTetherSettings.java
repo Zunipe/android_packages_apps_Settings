@@ -95,8 +95,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
-    @VisibleForTesting
-    WifiTetherAutoEnablePreferenceController mWifiTetherAutoEnablePreferenceController;
 
     @VisibleForTesting
     boolean mUnavailable;
@@ -210,7 +208,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mMaxCompatibilityPrefController =
                 use(WifiTetherMaximizeCompatibilityPreferenceController.class);
-        mWifiTetherAutoEnablePreferenceController = use(WifiTetherAutoEnablePreferenceController.class);
     }
 
     @Override
@@ -269,9 +266,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (context != null) {
             context.unregisterReceiver(mTetherChangeReceiver);
         }
-        if (mWifiTetherAutoEnablePreferenceController != null) {
-            mWifiTetherAutoEnablePreferenceController.unregisterObserver();
-        }
     }
 
     protected void onSecuritySummaryChanged(Integer securityResId) {
@@ -301,7 +295,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
         controllers.add(new WifiTetherMaximizeCompatibilityPreferenceController(context, listener));
-        controllers.add(new WifiTetherAutoEnablePreferenceController(context));
         return controllers;
     }
 
