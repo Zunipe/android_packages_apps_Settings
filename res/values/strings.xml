@@ -14975,4 +14975,12 @@
     <string name="wifi_hotspot_periodic_close_summary">Open after the set time will automatically close the hot spot</string>
     <string name="wifi_hotspot_periodic_start_title">Closing time</string>
     <string name="wifi_hotspot_periodic_end_title">Recovery time</string>
+    <string name="hotspot_connected_devices_summary">The number of connections：%d</string>
+    <string name="hotspot_connected_devices_title">Connected devices</string>
+    <string name="hotspot_connected_devices_keywords">hotspot, devices</string>
+    <string name="hotspot_connected_devices_empty_title">No connected device</string>
+    <string name="hotspot_connected_devices_unknown_hostname">Unknown</string>
+    <string name="hotspot_connected_devices_category">Connected devices</string>
+    <string name="hotspot_black_list_devices_category">Blacklisted devices</string>
+    <string name="hotspot_black_list_empty_title">No blacklisted devices</string>
 </resources>

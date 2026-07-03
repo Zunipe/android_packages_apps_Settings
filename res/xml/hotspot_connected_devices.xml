@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="hotspot_connected_devices"
+    android:title="@string/hotspot_connected_devices_title"
+    settings:keywords="@string/hotspot_connected_devices_keywords">
+    <PreferenceCategory
+        android:key="hotspot_connected_devices_category"
+        android:order="100"
+        android:title="@string/hotspot_connected_devices_category" />
+    <PreferenceCategory
+        android:key="hotspot_black_list_devices"
+        android:order="120"
+        android:title="@string/hotspot_black_list_devices_category" />
+</PreferenceScreen>

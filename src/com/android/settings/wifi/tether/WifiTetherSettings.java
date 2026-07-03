@@ -35,6 +35,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -45,6 +46,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
+import com.android.settings.zunipe.HotspotConnectedDevicesModel;
+import com.android.settings.zunipe.HotspotConnectedDevicesPreferenceController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -95,6 +98,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
     @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
+    HotspotConnectedDevicesPreferenceController mHotspotConnectedDevicesPreferenceController;
 
     @VisibleForTesting
     boolean mUnavailable;
@@ -158,7 +162,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             setupInstantHotspot(mWifiTetherViewModel.isInstantHotspotFeatureAvailable());
             mWifiTetherViewModel.getRestarting().observe(this, this::onRestartingChanged);
         }
-        Log.d("phf", "WifiTetherSettings onCreate");
     }
 
     @VisibleForTesting
@@ -208,6 +211,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mMaxCompatibilityPrefController =
                 use(WifiTetherMaximizeCompatibilityPreferenceController.class);
+        mHotspotConnectedDevicesPreferenceController = use(HotspotConnectedDevicesPreferenceController.class);
+        HotspotConnectedDevicesModel model = new ViewModelProvider(this).get(HotspotConnectedDevicesModel.class);
+        model.getConnectedDevices().observe(this, mHotspotConnectedDevicesPreferenceController::onClientsChanged);
     }
 
     @Override

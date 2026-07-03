@@ -71,4 +71,11 @@
         android:summary="@string/wifi_hotspot_auto_enable_summary"
         android:fragment="com.android.settings.zunipe.AutoHotspotSettings"
         android:title="@string/wifi_hotspot_auto_enable" />
+
+    <Preference
+        android:key="hotspot_connected_devices"
+        android:summary="@string/hotspot_connected_devices_summary"
+        android:fragment="com.android.settings.zunipe.HotspotConnectedDevicesSettings"
+        android:title="@string/hotspot_connected_devices_title"
+        settings:controller="com.android.settings.zunipe.HotspotConnectedDevicesPreferenceController" />
 </PreferenceScreen>

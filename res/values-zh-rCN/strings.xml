@@ -6011,4 +6011,12 @@
     <string name="wifi_hotspot_periodic_close_summary">打开后在设定的时间会自动关闭热点</string>
     <string name="wifi_hotspot_periodic_start_title">关闭时间</string>
     <string name="wifi_hotspot_periodic_end_title">恢复时间</string>
+    <string name="hotspot_connected_devices_summary">已连接的数量：%d</string>
+    <string name="hotspot_connected_devices_title">已连接的设备</string>
+    <string name="hotspot_connected_devices_keywords">hotspot, devices</string>
+    <string name="hotspot_connected_devices_empty_title">没有已连接的设备</string>
+    <string name="hotspot_connected_devices_unknown_hostname">未知</string>
+    <string name="hotspot_connected_devices_category">已连接的设备</string>
+    <string name="hotspot_black_list_devices_category">黑名单设备</string>
+    <string name="hotspot_black_list_empty_title">没有黑名单设备</string>
 </resources>
